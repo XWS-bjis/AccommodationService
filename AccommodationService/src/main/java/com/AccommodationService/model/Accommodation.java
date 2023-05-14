@@ -14,10 +14,9 @@ public class Accommodation {
     private String name;
     private Address address;
     private Offer offers;
-    private List<String> pictures;
+    private String pictures;
     private Integer minimalAllowedGuests;
     private Integer maximalAllowedGuests;
     private TypeOfPayment typeOfPayment;
-    private Price price;
     private Boolean isAutoConfirmed;
 }
