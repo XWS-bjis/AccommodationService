@@ -20,6 +20,5 @@ public class Accommodation {
     private int minimalAllowedGuests;
     private int maximalAllowedGuests;
     private TypeOfPayment typeOfPayment;
-    private Price price;
     private Boolean isAutoConfirmed;
 }

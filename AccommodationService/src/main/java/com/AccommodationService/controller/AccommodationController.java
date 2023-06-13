@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/accommodation")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AccommodationController {
 
     private AccommodationService accommodationService;
@@ -36,12 +36,6 @@ public class AccommodationController {
         return new ResponseEntity<>(newFlight, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Accommodation>> getAllAccommodations(){
-            List<Accommodation> accommodations = accommodationService.getAllAccommodations();
-            return new ResponseEntity<>(accommodations, HttpStatus.OK);
-    }
-
     @PostMapping("/filter")
     public ResponseEntity<List<AccommodationDTO>> search(@RequestBody AccommodationFilterDTO request) throws ParseException {
         List<Accommodation> searchedData = accommodationService.filter(request.getLocation(), request.getGuests());
@@ -51,5 +45,9 @@ public class AccommodationController {
         } else {
             return ResponseEntity.ok(new ArrayList<AccommodationDTO>());
         }
+
+    @GetMapping
+    public ResponseEntity<List<Accommodation>> getAll() {
+        return new ResponseEntity<>(accommodationService.getAll(), HttpStatus.OK);
     }
 }
