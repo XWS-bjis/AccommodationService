@@ -18,7 +18,7 @@ public class AccommodationDTO {
     String name;
     Address address;
     Offer offers;
-    List<String> pictures;
+    String pictures;
     int minimalAllowedGuests;
     int maximalAllowedGuests;
     String typeOfPayment;
