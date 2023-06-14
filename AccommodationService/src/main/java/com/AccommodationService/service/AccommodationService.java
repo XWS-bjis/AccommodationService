@@ -33,7 +33,7 @@ public class AccommodationService {
     }
 
     private List<String> getAllVisitedIdsByUser(String userId) {
-        String url = "http://localhost:8080/api/reservation/user/" + userId + "/visited";
+        String url = "http://reservation-service:8083/api/reservation/user/" + userId + "/visited";
         ResponseEntity<List<String>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -47,5 +47,11 @@ public class AccommodationService {
             // Handle error case
             throw new RuntimeException("Request failed with status code: " + response.getStatusCode());
         }
+    }
+
+    public Accommodation getById(String id) {
+        var optionalAccommodation = accommodationRepository.findById(id);
+        if (optionalAccommodation.isEmpty()) return null;
+        return optionalAccommodation.get();
     }
 }

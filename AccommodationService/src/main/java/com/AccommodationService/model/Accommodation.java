@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +21,6 @@ public class Accommodation {
     private Integer maximalAllowedGuests;
     private TypeOfPayment typeOfPayment;
     private Boolean isAutoConfirmed;
+    private List<Grade> grades;
+    private Double avgGrade;
 }

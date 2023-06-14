@@ -6,10 +6,10 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - mongodb
-  mongodb:
+      - mongodb-accommodation
+  mongodb-accommodation:
     image: mongo
-    container_name: mongodb
+    container_name: mongodb-accommodation
     ports:
       - 28017:27017
     volumes:
@@ -18,19 +18,19 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=rootuser
       - MONGO_INITDB_ROOT_PASSWORD=rootpass
-  mongo-express:
+  mongo-express-accommodation:
     image: mongo-express
-    container_name: mongo-express
+    container_name: mongo-express-accommodation
     restart: always
     ports:
       - 8082:8081
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
       - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
-      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_SERVER=mongodb-accommodation
 volumes:
   data: {}
 
 networks:
   default:
-    name: mongodb_network
+    name: service-discovery_default

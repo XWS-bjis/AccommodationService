@@ -31,4 +31,9 @@ public class AccommodationController {
     public ResponseEntity<List<Accommodation>> getAllVisitedByUser(@PathVariable("userId") String userId) {
         return new ResponseEntity<>(accommodationService.getAllVisitedByUser(userId), HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Accommodation> getById(@PathVariable("id") String id) {
+        return new ResponseEntity<>(accommodationService.getById(id), HttpStatus.OK);
+    }
 }
