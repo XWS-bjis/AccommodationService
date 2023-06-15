@@ -14,4 +14,8 @@ public class Address {
     private String postalCode;
     private String town;
     private String country;
+
+    public Address(String location) {
+        this.town = location;
+    }
 }
