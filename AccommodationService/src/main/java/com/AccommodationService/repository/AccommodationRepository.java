@@ -20,4 +20,5 @@ public interface AccommodationRepository extends MongoRepository<Accommodation, 
 //    List<Accommodation> findAllByOffersWifiAndOffersParkingAndOffersKitchenAndOffersAirConditionerAndOffersPetsAllowed(boolean wifi, boolean parking, boolean kitchen, boolean airConditioner, boolean pets);
 //    List<Accommodation> findAllByOffersWifiAndOffersParkingAndOffersKitchenAndOffersAirConditionerAndOffersPetsAllowed(boolean wifi, boolean parking, boolean kitchen, boolean airConditioner, boolean pets);
 
+
 }

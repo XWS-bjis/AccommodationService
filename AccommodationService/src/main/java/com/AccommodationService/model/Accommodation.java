@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,4 +26,6 @@ public class Accommodation {
     private Price price;
     private TypeOfPayment typeOfPayment;
     private Boolean isAutoConfirmed;
+    private List<Grade> grades;
+    private Double avgGrade;
 }
