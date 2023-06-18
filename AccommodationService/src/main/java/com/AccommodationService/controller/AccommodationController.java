@@ -52,6 +52,7 @@ public class AccommodationController {
     public ResponseEntity<List<AccommodationDTO>> sideFilter(@RequestBody AccommodationSideFilterDTO request) throws ParseException {
         System.out.println("Isidora");
         System.out.println(request.getOffer());
+        System.out.println("KOntroler: "+request.isFeaturedHost());
         List<Accommodation> searchedData = accommodationService.sideFilter(request.getOffer(), request.getMinPrice(), request.getMaxPrice(), request.isFeaturedHost());
         if (searchedData != null) {
             List<AccommodationDTO> dtos = searchedData.stream().map(accommodationConverter::entityToDto).toList();
