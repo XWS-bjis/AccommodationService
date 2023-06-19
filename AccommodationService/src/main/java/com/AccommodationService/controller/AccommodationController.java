@@ -9,9 +9,13 @@ import com.AccommodationService.model.Accommodation;
 import com.AccommodationService.model.Address;
 import com.AccommodationService.service.AccommodationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,7 @@ public class AccommodationController {
     private AccommodationService accommodationService;
     private final AccommodationConverter accommodationConverter;
     private final EnumConverter enumConverter;
+
     @Autowired
     public AccommodationController(AccommodationService accommodationService, EnumConverter enumConverter, AccommodationConverter accommodationConverter){
         this.enumConverter = enumConverter;
@@ -76,4 +81,10 @@ public class AccommodationController {
     public ResponseEntity<Accommodation> getById(@PathVariable("id") String id) {
         return new ResponseEntity<>(accommodationService.getById(id), HttpStatus.OK);
     }
+
+    @GetMapping("/host-identifiers/guest/{id}")
+    public ResponseEntity<List<String>> getAllIds(@PathVariable("id") String id) {
+        return new ResponseEntity<>(accommodationService.getAllIds(id), HttpStatus.OK);
+    }
+
 }
