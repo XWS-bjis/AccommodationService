@@ -74,7 +74,7 @@ db.accommodation.insert (
             "country": "serb"
         },
         "offers": {
-            "wifi": true,
+            "wifi": false,
             "parking": false,
             "kitchen": true,
             "airConditioner": true,
