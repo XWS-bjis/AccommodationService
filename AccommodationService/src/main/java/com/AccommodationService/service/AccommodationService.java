@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -56,7 +57,25 @@ public class AccommodationService {
         accommodations =  Streamable.of(accommodationRepository.findAll(builder.getValue())).toList();
 
         if (featuredHost) {
-//            Filter out accommodations without featured host
+            String url = "http://user:8084/api/v1/user/featured-hosts";
+            ResponseEntity<List<String>> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<String>>() {}
+            );
+
+            List<Accommodation> filterResult = new ArrayList<>();
+            if(response.getBody().size() > 0){
+                for (String hostId: response.getBody()){
+                    for(Accommodation accommodation: accommodations){
+                        if(accommodation.getHostId().equals(hostId)){
+                            filterResult.add(accommodation);
+                        }
+                    }
+                }
+            }
+            return filterResult;
         }
         return accommodations;
     }
@@ -91,5 +110,28 @@ public class AccommodationService {
         var optionalAccommodation = accommodationRepository.findById(id);
         if (optionalAccommodation.isEmpty()) return null;
         return optionalAccommodation.get();
+    }
+
+    public List<String> getAllIds(String id){
+        List<Accommodation> accommodations = accommodationRepository.findAll();
+        String reservationControllerURL = "http://reservation-service:8083/api/reservation/history/user/"+id;
+        ResponseEntity<List<String>> response = restTemplate.exchange(
+                reservationControllerURL,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+        List<String> hostIds = new ArrayList<>();
+
+        if(response.getBody().size() > 0){
+            for(String accommodationId: response.getBody()){
+                for(Accommodation a: accommodations){
+                    if(a.getId().equals(accommodationId)){
+                        hostIds.add(a.getHostId());
+                    }
+                }
+            }
+        }
+        return hostIds;
     }
 }

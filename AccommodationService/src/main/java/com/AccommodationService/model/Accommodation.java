@@ -16,7 +16,7 @@ import java.util.List;
 @Document
 public class Accommodation {
     private String id;
-    private Long hostId;
+    private String hostId;
     private String name;
     private Address address;
     private Offer offers;

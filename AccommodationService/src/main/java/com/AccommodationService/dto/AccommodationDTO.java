@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 public class AccommodationDTO {
     String id;
-    Long hostId;
+    String hostId;
     String name;
     Address address;
     Offer offers;
